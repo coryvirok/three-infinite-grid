@@ -4,14 +4,15 @@ import {
   ColorRepresentation,
   DoubleSide,
   InstancedMesh,
-  IUniform,
+  Uniform,
   Object3D,
   ShaderMaterial,
   Vector2,
 } from "three";
 
-import frag from "./three-infinite-grid.frag?raw";
-import vert from "./three-infinite-grid.vert?raw";
+//import frag from "./three-infinite-grid.frag?raw";
+//import vert from "./three-infinite-grid.vert?raw";
+import { frag, vert } from "./shaders";
 import { mesh2Plane, PLANE } from "./utils";
 
 export type ThreeInfiniteGridOptions = {
@@ -66,11 +67,11 @@ export class ThreeInfiniteGrid extends Object3D {
       DEFAULT_SETTINGS,
       settings,
     );
-    const _uniforms: { [key: string]: IUniform } = {};
+    const _uniforms: { [key: string]: Uniform } = {};
     (Object.keys(_settings) as Array<keyof ThreeInfiniteGridOptions>).forEach(
       (propKey) => {
         const uniformKey = `u${propKey.charAt(0).toUpperCase()}${propKey.slice(1)}`;
-        _uniforms[uniformKey] = { value: _settings[propKey] };
+        _uniforms[uniformKey] = new Uniform(_settings[propKey]);
       },
     );
 

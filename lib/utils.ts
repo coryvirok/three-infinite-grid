@@ -7,8 +7,8 @@ import {
   ShaderMaterial,
   Vector2,
   Vector3,
+  MathUtils
 } from "three";
-import { DEG2RAD } from "three/src/math/MathUtils";
 
 export enum PLANE {
   XZ,
@@ -165,11 +165,11 @@ export const mesh2Plane = (
       break;
     }
     case PLANE.XY: {
-      mesh.setRotationFromEuler(new Euler(90 * DEG2RAD, 0, 0));
+      mesh.setRotationFromEuler(new Euler(90 * MathUtils.DEG2RAD, 0, 0));
       break;
     }
     case PLANE.ZY: {
-      mesh.setRotationFromEuler(new Euler(-90 * DEG2RAD, 0, 90 * DEG2RAD));
+      mesh.setRotationFromEuler(new Euler(-90 * MathUtils.DEG2RAD, 0, 90 * MathUtils.DEG2RAD));
     }
   }
 

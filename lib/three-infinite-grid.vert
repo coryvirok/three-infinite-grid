@@ -1,5 +1,18 @@
-varying vec4 vUv;
-varying vec4 vPos;
+precision mediump float;
+
+// Input vertex attributes
+//in vec3 position; // Changed from implicit attribute
+
+// Output variables to fragment shader
+out vec4 vUv;    // Changed from 'varying'
+out vec4 vPos;   // Changed from 'varying'
+
+// Uniforms
+// uniform mat4 projectionMatrix; // Explicitly declared
+// uniform mat4 modelViewMatrix;  // Explicitly declared
+// uniform mat4 modelMatrix;      // Explicitly declared
+// uniform mat4 instanceMatrix;   // Explicitly declared (assuming mat4)
+// uniform vec3 cameraPosition;   // Explicitly declared
 
 uniform int uPlane;
 uniform float uScale;
@@ -18,6 +31,8 @@ void main() {
 
     // trick to reduce visual artifacts when far from the world origin
     vec3 cameraCenteringOffset = floor(cameraPosition / division) * division;
+
+    // Original vUv assignments preserved
     if(uPlane == XZ_PLANE){
         vUv.yx = (worldPos - cameraCenteringOffset).xz;
         vUv.wz = worldPos.xz;
